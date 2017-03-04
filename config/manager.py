@@ -39,6 +39,12 @@ class SettingsManager:
             self.parser.add_argument("--%s" % key, default=true_value, type=type(true_value), help=help)
         return cfg
 
+    @staticmethod
+    def __strparser(st):
+        if st[0] == st[-1] == "'" or st[0] == st[1] == "\"":
+            return st[1: -1]
+        return st
+
     def __getattr__(self, item):
         if not self.ready:
             self.update()

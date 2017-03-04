@@ -20,6 +20,11 @@ class SettingsManager:
                 raise RuntimeError("Config format error: `%s`" % line)
             key = pair[0].strip()
             value = pair[1].strip()
+            help = ""
+            if "#" in value:
+                i = value.index("#")
+                help = value[i+1:].strip()
+                value = value[:i].strip()
             true_value = None
             for parser in (int, float, self.__strparser):
                 try:
@@ -31,7 +36,7 @@ class SettingsManager:
             if true_value is None:
                 raise ValueError("unexpected error in config: `%s`" % line)
             cfg[key] = {'default': true_value, 'type': type(true_value)}
-            self.parser.add_argument("--%s" % key, default=true_value, type=type(true_value))
+            self.parser.add_argument("--%s" % key, default=true_value, type=type(true_value), help=help)
         return cfg
 
     def __getattr__(self, item):

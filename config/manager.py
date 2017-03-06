@@ -41,7 +41,7 @@ class SettingsManager:
 
     @staticmethod
     def __strparser(st):
-        if st[0] == st[-1] == "'" or st[0] == st[1] == "\"":
+        if st[0] == st[-1] == "'" or st[0] == st[-1] == "\"":
             return st[1: -1]
         return st
 

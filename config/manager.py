@@ -2,14 +2,15 @@ from argparse import ArgumentParser
 
 
 class SettingsManager:
+    path = "config.cfg"
+    
     def __init__(self):
-        self.path = "config.cfg"
         self.parser = ArgumentParser()
         self.ready = False
         with open(self.path, "r") as f:
-            self.data = self.__parse(f)
+            self.data = self.__parse_config_file(f)
 
-    def __parse(self, file):
+    def __parse_config_file(self, file):
         cfg = {}
         for line in file:
             stripped = line.strip()

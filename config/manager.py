@@ -27,7 +27,7 @@ class SettingsManager:
                 help = value[i+1:].strip()
                 value = value[:i].strip()
             true_value = None
-            for parser in (int, float, self.__strparser):
+            for parser in (int, float, bool, self.__strparser):
                 try:
                     true_value = parser(value)
                 except ValueError:

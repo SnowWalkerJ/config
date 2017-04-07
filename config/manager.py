@@ -27,7 +27,7 @@ class SettingsManager:
                 help = value[i+1:].strip()
                 value = value[:i].strip()
             true_value = None
-            for parser in (int, float, bool, self.__strparser):
+            for parser in (int, float, self.__boolparser, self.__strparser):
                 try:
                     true_value = parser(value)
                 except ValueError:
@@ -45,6 +45,15 @@ class SettingsManager:
         if st[0] == st[-1] == "'" or st[0] == st[-1] == "\"":
             return st[1: -1]
         return st
+    
+    @staticmethod
+    def __boolparser(st):
+        if st == "False":
+            return False
+        elif st == "True":
+            return True
+        else:
+            raise ValueError
 
     def __getattr__(self, item):
         if not self.ready:

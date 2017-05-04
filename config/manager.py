@@ -2,9 +2,8 @@ from argparse import ArgumentParser
 
 
 class SettingsManager:
-    path = "config.cfg"
-    
-    def __init__(self):
+    def __init__(self, path="config.cfg"):
+        self.path = path
         self.parser = ArgumentParser()
         self.ready = False
         with open(self.path, "r") as f:

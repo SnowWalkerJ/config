@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 
 
 class SettingsManager:
+    """Manages configurations. Enables the settings to be overrided by commandline options"""
     def __init__(self, path="config.cfg"):
         self.path = path
         self.parser = ArgumentParser()
@@ -63,10 +64,26 @@ class SettingsManager:
             return self.data[item]['default']
 
     def add_argument(self, *args, **kwargs):
+        """Implemens ArgumentParser.add_argument"""
         self.parser.add_argument(*args, **kwargs)
 
     def keys(self):
+        """
+        Yields
+        ------
+        key
+        """
         return self.data.keys()
+    
+    def items(self):
+        """
+        Yields
+        ------
+        key
+
+        value
+        """
+        return self.data.items()
 
     def update(self):
         args = self.parser.parse_args()

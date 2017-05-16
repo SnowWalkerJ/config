@@ -83,7 +83,12 @@ class SettingsManager:
 
         value
         """
-        return self.data.items()
+        for key, item in self.data.items():
+            try:
+                value = item['value']
+            except KeyError:
+                value = item['default']
+            yield key, value
 
     def update(self):
         args = self.parser.parse_args()
